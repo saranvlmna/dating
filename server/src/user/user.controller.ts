@@ -64,7 +64,18 @@ export class UserController {
     body['userId'] = req.user.id
     const result = await this.userService.updateInterests(body);
     return res.status(StatusCodes.OK).json({
-      message: "Social links added successfully",
+      message: "Interests updated successfully",
+      data: result,
+    });
+  }
+
+  @UseInterceptors(Authguard)
+  @Post("update/images")
+  async updateImages(@Body() body: any, @Res() res: any, @Req() req: any) {
+    body['userId'] = req.user.id
+    const result = await this.userService.updateImages(body);
+    return res.status(StatusCodes.OK).json({
+      message: "Images updated successfully",
       data: result,
     });
   }

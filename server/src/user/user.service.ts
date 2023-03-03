@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { Images, ImagesDocumet } from "src/database/images";
 import { Interests } from "src/database/interests";
 import { Social, SocialDocumet } from "src/database/social";
 import { User, UserDocumet } from "src/database/user";
@@ -13,6 +13,7 @@ export class UserService {
     @InjectModel(User.name) private userModel: Model<UserDocumet>,
     @InjectModel(Social.name) private socialModel: Model<SocialDocumet>,
     @InjectModel(Interests.name) private interestsModel: Model<SocialDocumet>,
+    @InjectModel(Images.name) private imagesModel: Model<ImagesDocumet>,
     
   ) { }
 
@@ -53,6 +54,22 @@ export class UserService {
       }, data)
     }
   }
+
+  async updateImages(data) {
+    let existInterests = await this.imagesModel.findOne({ userId: data.userId })
+    if (!existInterests) {
+      return await this.imagesModel.create(data)
+    }
+    else {
+      return await this.imagesModel.updateOne({
+        userId: data.userId
+      }, data)
+    }
+  }
+
+  
+
+  
 
   
 }
