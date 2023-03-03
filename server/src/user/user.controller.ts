@@ -28,6 +28,16 @@ export class UserController {
   }
 
   @UseInterceptors(Authguard)
+  @Get("newfeed")
+  async getNewFeeds(@Res() res: any) {
+    const users = await this.userService.getNewFeeds();
+    return res.status(StatusCodes.OK).json({
+      message: "Feeds listed successfully",
+      data: users,
+    });
+  }
+
+  @UseInterceptors(Authguard)
   @Put("edit")
   async editUser(@Body() body: any, @Res() res: any) {
     const result = await this.userService.editUser(body, body.id);

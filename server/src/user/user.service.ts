@@ -14,7 +14,7 @@ export class UserService {
     @InjectModel(Social.name) private socialModel: Model<SocialDocumet>,
     @InjectModel(Interests.name) private interestsModel: Model<SocialDocumet>,
     @InjectModel(Images.name) private imagesModel: Model<ImagesDocumet>,
-    
+
   ) { }
 
   async findAll() {
@@ -32,14 +32,14 @@ export class UserService {
   async updateSocialLinks(data) {
     let existSocialData = await this.socialModel.findOne({ userId: data.userId })
     console.log(existSocialData);
-    
+
     if (!existSocialData) {
       return await this.socialModel.create(data)
     }
     else {
       return await this.socialModel.updateOne({
         userId: data.userId
-      },data)
+      }, data)
     }
   }
 
@@ -67,9 +67,16 @@ export class UserService {
     }
   }
 
-  
 
-  
+  async getNewFeeds() {
+    let data = await this.userModel.find()
+      .populate({
+        path: "Images",
+        // populate: {
+        //   path: "comments" 
+        // }
+      })
+    console.log(data);
 
-  
+  }
 }
