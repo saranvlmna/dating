@@ -3,7 +3,9 @@ import {
   Controller,
   Delete,
   Get,
+  Post,
   Put,
+  Req,
   Res,
   UseInterceptors,
 } from "@nestjs/common";
@@ -41,6 +43,28 @@ export class UserController {
     const result = await this.userService.deleteUser(body.id);
     return res.status(StatusCodes.OK).json({
       message: "user deleted successfully",
+      data: result,
+    });
+  }
+
+  @UseInterceptors(Authguard)
+  @Post("update/social")
+  async updateSocialLinks(@Body() body: any, @Res() res: any,@Req() req:any) {
+    body['userId'] = req.user.id
+    const result = await this.userService.updateSocialLinks(body);
+    return res.status(StatusCodes.OK).json({
+      message: "Social links added successfully",
+      data: result,
+    });
+  }
+
+  @UseInterceptors(Authguard)
+  @Post("update/interests")
+  async updateInterests(@Body() body: any, @Res() res: any, @Req() req: any) {
+    body['userId'] = req.user.id
+    const result = await this.userService.updateInterests(body);
+    return res.status(StatusCodes.OK).json({
+      message: "Social links added successfully",
       data: result,
     });
   }
