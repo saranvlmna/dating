@@ -5,20 +5,20 @@ export type InterestsDocumet = Interests & Document;
 
 @Schema()
 export class Interests {
-    @Prop()
-    userId: string;
+  @Prop()
+  userId: string;
 
-    @Prop()
-    endDate: Date;
+  @Prop()
+  endDate: Date;
 
-    @Prop()
-    plan: string;
+  @Prop()
+  plan: string;
 
-    @Prop({ default: now() })
-    createdAt: Date;
+  @Prop({ default: now() })
+  createdAt: Date;
 
-    @Prop({ default: now() })
-    updatedAt: Date;
+  @Prop({ default: now() })
+  updatedAt: Date;
 }
 
 export const InterestsSchema = SchemaFactory.createForClass(Interests);

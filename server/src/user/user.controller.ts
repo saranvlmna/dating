@@ -59,8 +59,8 @@ export class UserController {
 
   @UseInterceptors(Authguard)
   @Post("update/social")
-  async updateSocialLinks(@Body() body: any, @Res() res: any,@Req() req:any) {
-    body['userId'] = req.user.id
+  async updateSocialLinks(@Body() body: any, @Res() res: any, @Req() req: any) {
+    body["userId"] = req.user.id;
     const result = await this.userService.updateSocialLinks(body);
     return res.status(StatusCodes.OK).json({
       message: "Social links added successfully",
@@ -71,7 +71,7 @@ export class UserController {
   @UseInterceptors(Authguard)
   @Post("update/interests")
   async updateInterests(@Body() body: any, @Res() res: any, @Req() req: any) {
-    body['userId'] = req.user.id
+    body["userId"] = req.user.id;
     const result = await this.userService.updateInterests(body);
     return res.status(StatusCodes.OK).json({
       message: "Interests updated successfully",
@@ -82,7 +82,7 @@ export class UserController {
   @UseInterceptors(Authguard)
   @Post("update/images")
   async updateImages(@Body() body: any, @Res() res: any, @Req() req: any) {
-    body['userId'] = req.user.id
+    body["userId"] = req.user.id;
     const result = await this.userService.updateImages(body);
     return res.status(StatusCodes.OK).json({
       message: "Images updated successfully",

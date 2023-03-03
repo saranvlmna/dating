@@ -5,23 +5,23 @@ export type ChatDocumet = Chat & Document;
 
 @Schema()
 export class Chat {
-    @Prop()
-    userId: string;
+  @Prop()
+  userId: string;
 
-    @Prop()
-    senderId: string;
+  @Prop()
+  senderId: string;
 
-    @Prop()
-    receiverId: string;
+  @Prop()
+  receiverId: string;
 
-    @Prop()
-    message: string;
+  @Prop()
+  message: string;
 
-    @Prop({ default: now() })
-    createdAt: Date;
+  @Prop({ default: now() })
+  createdAt: Date;
 
-    @Prop({ default: now() })
-    updatedAt: Date;
+  @Prop({ default: now() })
+  updatedAt: Date;
 }
 
 export const ChatSchema = SchemaFactory.createForClass(Chat);
